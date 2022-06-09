@@ -11,17 +11,22 @@ import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {reducers} from './_stores/reducers';
 import {MapEffect} from './_stores/effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './components/header/header.component';
+import {MaterialModule} from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     ListPageComponent,
-    DetailsPageComponent
+    DetailsPageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    MaterialModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature('listings', reducers),
     StoreDevtoolsModule.instrument({
@@ -32,6 +37,7 @@ import {MapEffect} from './_stores/effects';
     EffectsModule.forFeature([
       MapEffect
     ]),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

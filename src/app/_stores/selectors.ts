@@ -12,6 +12,11 @@ export const displayListingsSelector = createSelector(
   (listingsState: ListingsState) => listingsState.listingsResponse
 );
 
+export const displaySubInfoSelector = createSelector(
+  listingsFeatureSelector,
+  (listingsState: ListingsState) => listingsState.subInfoResponse
+);
+
 // export const isLoadingSelector = createSelector(
 //   mapFeatureSelector,
 //   (mapState: ListingsState) => mapState.isLoading

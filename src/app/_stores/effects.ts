@@ -2,8 +2,15 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {displayListingsAction, displayListingsFailedAction, displayListingsSuccessAction} from './actions';
+import {
+  displayListingsAction,
+  displayListingsFailedAction,
+  displayListingsSuccessAction,
+  displaySubInfoAction, displaySubInfoFailedAction,
+  displaySubInfoSuccessAction
+} from './actions';
 import {ApiService} from '../services/api.service';
+import {SubInfo} from '../_models/subInfo';
 
 @Injectable()
 export class MapEffect {
@@ -18,6 +25,23 @@ export class MapEffect {
 
           catchError(() => {
             return of(displayListingsFailedAction());
+          })
+        );
+      })
+    )
+  );
+
+  displaySubInfo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(displaySubInfoAction),
+      switchMap(() => {
+        return this.apiService.getSubInfo().pipe(
+          map((subInfoResponse: SubInfo) => {
+            return displaySubInfoSuccessAction({subInfoResponse});
+          }),
+
+          catchError(() => {
+            return of(displaySubInfoFailedAction());
           })
         );
       })
@@ -44,5 +68,6 @@ export class MapEffect {
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
-  ) {}
+  ) {
+  }
 }

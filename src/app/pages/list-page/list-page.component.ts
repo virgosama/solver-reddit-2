@@ -28,11 +28,11 @@ export class ListPageComponent implements OnInit {
 
   loadListings(): void {
     this.listingsResponse$ = this.store.pipe(select(displayListingsSelector));
-    this.listingsResponse$.subscribe(response => {
-      if (response) {
-        this.topicList = response.map((e: any) => e.data);
-      }
-    });
+    // this.listingsResponse$.subscribe(response => {
+    //   if (response) {
+    //     this.topicList = response.map((e: any) => e.data);
+    //   }
+    // });
     // this.apiService.getListings2('new').subscribe(e => {
     //   console.log(e);
     // });

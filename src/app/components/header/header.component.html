@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="header__banner">
+    <img src="{{(subInfoResponse$ | async)?.banner_background_image}}" alt="banner">
+  </div>
+  <div class="header__title">
+    <div class="header__icon">
+      <img src="{{(subInfoResponse$ | async)?.community_icon}}" alt="icon">
+    </div>
+    <h1 class="header__sub-title">
+      {{(subInfoResponse$ | async)?.title}}
+    </h1>
+  </div>
+  <p class="header__description">
+   {{(subInfoResponse$ | async)?.public_description}}
+  </p>
+</div>

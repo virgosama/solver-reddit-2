@@ -4,16 +4,23 @@ import {createReducer, on, Action} from '@ngrx/store';
 //   displayListingsAction, displayListingsFailedAction, displayListingsSuccessAction
 // } from './actions';
 import {ListingsState} from '../_models/listings-state';
-import {displayListingsAction, displayListingsFailedAction, displayListingsSuccessAction} from './actions';
+import {
+  displayListingsAction,
+  displayListingsFailedAction,
+  displayListingsSuccessAction,
+  displaySubInfoAction, displaySubInfoFailedAction,
+  displaySubInfoSuccessAction
+} from './actions';
 
 const initialState: ListingsState = {
   listingsResponse: null,
   listingDetailsResponse: null,
+  subInfoResponse: null,
   isLoading: false,
   isDetails: false,
 };
 
-const mapReducer = createReducer(
+const listingReducer = createReducer(
   initialState,
   on(
     displayListingsAction,
@@ -32,6 +39,28 @@ const mapReducer = createReducer(
   ),
   on(
     displayListingsFailedAction,
+    (state): ListingsState => ({
+      ...state,
+      isLoading: false,
+    })
+  ),
+  on(
+    displaySubInfoAction,
+    (state): ListingsState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    displaySubInfoSuccessAction,
+    (state, action): ListingsState => ({
+      ...state,
+      isLoading: false,
+      subInfoResponse: action.subInfoResponse,
+    })
+  ),
+  on(
+    displaySubInfoFailedAction,
     (state): ListingsState => ({
       ...state,
       isLoading: false,
@@ -64,5 +93,5 @@ const mapReducer = createReducer(
 );
 
 export function reducers(state: ListingsState, action: Action): {} {
-  return mapReducer(state, action);
+  return listingReducer(state, action);
 }

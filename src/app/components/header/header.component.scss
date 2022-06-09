@@ -1,0 +1,33 @@
+.header {
+
+  &__banner {
+    height: 200px;
+    width: 100vw;
+
+    img {
+      width: 100vw;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    margin: 2rem 3rem;
+    column-gap: 4rem;
+  }
+
+  &__icon {
+
+    img {
+      height: 128px;
+      width: auto;
+      border-radius: 50%;
+
+    }
+  }
+
+  &__description {
+    margin: 2rem 3rem;
+  }
+}
