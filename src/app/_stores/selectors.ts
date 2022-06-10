@@ -27,7 +27,22 @@ export const displayListingDetailsSelector = createSelector(
   (listingsState: ListingsState) => listingsState.listingDetailsResponse
 );
 
-export const isDetailsSelector = createSelector(
+export const isOnDetailsPageSelector = createSelector(
   listingsFeatureSelector,
-  (listingsState: ListingsState) => listingsState.isDetails
+  (listingsState: ListingsState) => listingsState.isOnDetailsPage
+);
+
+export const isHeaderErrorSelector = createSelector(
+  listingsFeatureSelector,
+  (listingsState: ListingsState) => listingsState.isHeaderError
+);
+
+export const isListErrorSelector = createSelector(
+  listingsFeatureSelector,
+  (listingsState: ListingsState) => listingsState.isListError
+);
+
+export const isDetailsErrorSelector = createSelector(
+  listingsFeatureSelector,
+  (listingsState: ListingsState) => listingsState.isDetailsError
 );

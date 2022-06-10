@@ -1,18 +1,23 @@
 <div class="header">
-  <div class="header__banner">
-    <img src="{{(subInfoResponse$ | async)?.banner_background_image}}" alt="banner">
-  </div>
-  <div class="header__title">
-    <div class="header__icon">
-      <img src="{{(subInfoResponse$ | async)?.community_icon}}" alt="icon">
+  <app-error-handler *ngIf="isHeaderError$ | async"
+                     (reloadData)="ngOnInit()"
+  ></app-error-handler>
+  <ng-container *ngIf="!(isHeaderError$ | async)">
+    <div class="header__banner">
+      <img src="{{(subInfoResponse$ | async)?.banner_background_image}}" alt="banner">
     </div>
-    <div>
-      <h1 class="header__sub-title">
-        {{(subInfoResponse$ | async)?.title}}
-      </h1>
-      <p class="header__description">
-        {{(subInfoResponse$ | async)?.public_description}}
-      </p>
+    <div class="header__title">
+      <div class="header__icon">
+        <img src="{{(subInfoResponse$ | async)?.community_icon}}" alt="icon">
+      </div>
+      <div>
+        <h1 class="header__sub-title">
+          {{(subInfoResponse$ | async)?.title}}
+        </h1>
+        <p class="header__description">
+          {{(subInfoResponse$ | async)?.public_description}}
+        </p>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

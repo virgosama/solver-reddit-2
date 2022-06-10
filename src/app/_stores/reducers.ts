@@ -16,7 +16,10 @@ const initialState: ListingsState = {
   listingDetailsResponse: null,
   subInfoResponse: null,
   isLoading: false,
-  isDetails: false,
+  isOnDetailsPage: false,
+  isHeaderError: false,
+  isListError: false,
+  isDetailsError: false
 };
 
 const listingReducer = createReducer(
@@ -26,7 +29,9 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: true,
-      isDetails: false,
+      isOnDetailsPage: false,
+      isListError: false,
+      isDetailsError: false,
       listingDetailsResponse: null,
     })
   ),
@@ -35,7 +40,9 @@ const listingReducer = createReducer(
     (state, action): ListingsState => ({
       ...state,
       isLoading: false,
-      isDetails: false,
+      isOnDetailsPage: false,
+      isListError: false,
+      isDetailsError: false,
       listingDetailsResponse: null,
       listingsResponse: action.listingsResponse,
     })
@@ -45,7 +52,9 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: false,
-      isDetails: false,
+      isOnDetailsPage: false,
+      isListError: true,
+      isDetailsError: false,
       listingDetailsResponse: null,
     })
   ),
@@ -54,7 +63,10 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: true,
-      isDetails: false,
+      isOnDetailsPage: false,
+      isListError: false,
+      isHeaderError: false,
+      isDetailsError: false,
     })
   ),
   on(
@@ -62,7 +74,10 @@ const listingReducer = createReducer(
     (state, action): ListingsState => ({
       ...state,
       isLoading: false,
-      isDetails: false,
+      isOnDetailsPage: false,
+      isHeaderError: false,
+      isListError: false,
+      isDetailsError: false,
       subInfoResponse: action.subInfoResponse,
     })
   ),
@@ -71,7 +86,10 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: false,
-      isDetails: false,
+      isOnDetailsPage: false,
+      isHeaderError: true,
+      isListError: false,
+      isDetailsError: false,
     })
   ),
   on(
@@ -79,7 +97,9 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: true,
-      isDetails: true,
+      isOnDetailsPage: true,
+      isListError: false,
+      isDetailsError: false,
       listingsResponse: null,
     })
   ),
@@ -89,16 +109,21 @@ const listingReducer = createReducer(
       ...state,
       listingDetailsResponse: action.listingDetailsResponse,
       isLoading: false,
-      isDetails: true,
+      isOnDetailsPage: true,
+      isListError: false,
+      isDetailsError: false,
       listingsResponse: null,
     })
   ),
+
   on(
     displayListingDetailsFailedAction,
     (state): ListingsState => ({
       ...state,
       isLoading: false,
-      isDetails: true,
+      isOnDetailsPage: true,
+      isListError: false,
+      isDetailsError: true,
       listingsResponse: null,
     })
   ),

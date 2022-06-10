@@ -5,5 +5,8 @@ export interface ListingsState {
   listingDetailsResponse: any | null;
   subInfoResponse: SubInfo | null;
   isLoading: boolean | null;
-  isDetails: boolean | null;
+  isOnDetailsPage: boolean | null;
+  isHeaderError: boolean | null;
+  isListError: boolean | null;
+  isDetailsError: boolean | null;
 }

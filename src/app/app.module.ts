@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import {MaterialModule} from './material.module';
 import {LoadingComponent} from './components/loading/loading.component';
+import {ErrorHandlerComponent} from './components/error-handler/error-handler.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {LoadingComponent} from './components/loading/loading.component';
     ListPageComponent,
     DetailsPageComponent,
     HeaderComponent,
-    LoadingComponent
+    LoadingComponent,
+    ErrorHandlerComponent
   ],
   imports: [
     BrowserModule,

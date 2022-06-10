@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../_models/app-state';
-import {isDetailsSelector, isLoadingSelector} from '../../_stores/selectors';
+import {isLoadingSelector, isOnDetailsPageSelector} from '../../_stores/selectors';
 
 @Component({
   selector: 'app-main-page',
@@ -18,7 +18,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isDetailsPage$ = this.store.pipe(select(isDetailsSelector));
+    this.isDetailsPage$ = this.store.pipe(select(isOnDetailsPageSelector));
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
   }
 

@@ -1,27 +1,31 @@
-<div class="listing-item" *ngFor="let listing of (listingsResponse$ | async)?.children">
-  <mat-card>
-    <mat-card-title>{{listing.data.title}}</mat-card-title>
-    <mat-card-subtitle>{{listing.data.num_comments}} comments | score: {{listing.data.score}}</mat-card-subtitle>
-    <mat-card-content>
-      {{listing.data.selftext}}
-    </mat-card-content>
-    <mat-card-content align="center"
-                      *ngIf="listing.data.thumbnail.length > 10">
-      <img src="{{listing.data.thumbnail}}"/>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button
-              color="accent"
-              (click)="onClickReadMore(listing.data.id)"
-      >Read More
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-<mat-paginator
-  [length]="pageLength"
-  [pageSize]="10"
-  (page)="onPageChange($event)"
-  aria-label="Page">
-</mat-paginator>
-
+<app-error-handler *ngIf="isListError$ | async"
+                   (reloadData)="ngOnInit()"
+></app-error-handler>
+<ng-container *ngIf="!(isListError$ | async)">
+  <div class="listing-item" *ngFor="let listing of (listingsResponse$ | async)?.children">
+    <mat-card>
+      <mat-card-title>{{listing.data.title}}</mat-card-title>
+      <mat-card-subtitle>{{listing.data.num_comments}} comments | score: {{listing.data.score}}</mat-card-subtitle>
+      <mat-card-content>
+        {{listing.data.selftext}}
+      </mat-card-content>
+      <mat-card-content align="center"
+                        *ngIf="listing.data.thumbnail.length > 10">
+        <img src="{{listing.data.thumbnail}}"/>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-flat-button
+                color="accent"
+                (click)="onClickReadMore(listing.data.id)"
+        >Read More
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <mat-paginator
+    [length]="pageLength"
+    [pageSize]="10"
+    (page)="onPageChange($event)"
+    aria-label="Page">
+  </mat-paginator>
+</ng-container>

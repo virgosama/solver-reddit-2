@@ -3,7 +3,7 @@ import {displayListingDetailsAction, displayListingsAction} from '../../_stores/
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../_models/app-state';
 import {Observable, Subscription} from 'rxjs';
-import {displayListingsSelector, isLoadingSelector} from '../../_stores/selectors';
+import {displayListingsSelector, isListErrorSelector, isLoadingSelector} from '../../_stores/selectors';
 import {PageEvent} from '@angular/material/paginator';
 
 @Component({
@@ -17,6 +17,8 @@ export class ListPageComponent implements OnInit, OnDestroy {
   pageLength = 11;
   nextPageListings = '';
   prevPageListings = '';
+
+  isListError$: Observable<boolean | null>;
   listingResponseSubscription: Subscription;
   listingsResponse$ = null as Observable<any> | null;
 
@@ -30,9 +32,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
   loadListings(): void {
     this.store.dispatch(displayListingsAction({sortBy: this.sortBy, after: this.nextPageListings, before: this.prevPageListings}));
     this.listingsResponse$ = this.store.pipe(select(displayListingsSelector));
+    this.isListError$ = this.store.pipe(select(isListErrorSelector));
     this.listingResponseSubscription = this.store.pipe(select(displayListingsSelector)).subscribe(response => {
       if (response) {
-        console.log(response);
         this.nextPageListings = response.after || '';
         this.prevPageListings = response.before || '';
       }
