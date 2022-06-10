@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {AppState} from '../../_models/app-state';
 import {select, Store} from '@ngrx/store';
-import {displayListingDetailsSelector} from '../../_stores/selectors';
+import {displayListingDetailsSelector, isLoadingSelector} from '../../_stores/selectors';
 import {displayListingsAction} from '../../_stores/actions';
 
 @Component({
@@ -16,7 +16,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
   nextPageListings = '';
   prevPageListings = '';
 
-  listingDetailsResponse$: Observable<any | null>;
   listingDetailsSubscription: Subscription;
   listingSubject = {} as any;
   listingComments = [] as any[];
@@ -29,7 +28,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
   }
 
   loadListingDetails(): void {
-    this.listingDetailsResponse$ = this.store.pipe(select(displayListingDetailsSelector));
     this.listingDetailsSubscription = this.store.pipe(select(displayListingDetailsSelector)).subscribe(response => {
       if (response) {
         const listingSubjectTemp = response[0].data.children[0].data;

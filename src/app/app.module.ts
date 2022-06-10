@@ -14,6 +14,7 @@ import {MapEffect} from './_stores/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import {MaterialModule} from './material.module';
+import {LoadingComponent} from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MaterialModule} from './material.module';
     MainPageComponent,
     ListPageComponent,
     DetailsPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

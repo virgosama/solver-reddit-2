@@ -1,4 +1,6 @@
 <app-header></app-header>
-<mat-divider></mat-divider>
-<app-list-page *ngIf="!(isDetailsPage$ | async)"></app-list-page>
-<app-details-page *ngIf="(isDetailsPage$ | async)"></app-details-page>
+<div class="container">
+<app-loading *ngIf="isLoading$ | async"></app-loading>
+  <app-list-page *ngIf="!(isDetailsPage$ | async)"></app-list-page>
+  <app-details-page *ngIf="(isDetailsPage$ | async)"></app-details-page>
+</div>

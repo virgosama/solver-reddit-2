@@ -3,7 +3,7 @@ import {displayListingDetailsAction, displayListingsAction} from '../../_stores/
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../_models/app-state';
 import {Observable, Subscription} from 'rxjs';
-import {displayListingsSelector} from '../../_stores/selectors';
+import {displayListingsSelector, isLoadingSelector} from '../../_stores/selectors';
 import {PageEvent} from '@angular/material/paginator';
 
 @Component({
@@ -37,7 +37,6 @@ export class ListPageComponent implements OnInit, OnDestroy {
         this.prevPageListings = response.before || '';
       }
     });
-
   }
 
   onPageChange(pageEvent: PageEvent): void {

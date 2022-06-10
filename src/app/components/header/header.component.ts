@@ -14,7 +14,6 @@ import {ApiService} from '../../services/api.service';
 })
 export class HeaderComponent implements OnInit {
 
-  // subInfoResponse$ = null as Observable<SubInfo> | null;
   subInfoResponse$?: Observable<SubInfo | null>;
 
   constructor(private store: Store<AppState>,
@@ -22,11 +21,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(displaySubInfoAction());
     this.loadSubInfo();
   }
 
   loadSubInfo(): void {
+    this.store.dispatch(displaySubInfoAction());
     this.subInfoResponse$ = this.store.pipe(select(displaySubInfoSelector));
     this.apiService.getSubInfo().subscribe(e => {
     });

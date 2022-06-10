@@ -27,6 +27,7 @@ const listingReducer = createReducer(
       ...state,
       isLoading: true,
       isDetails: false,
+      listingDetailsResponse: null,
     })
   ),
   on(
@@ -35,6 +36,7 @@ const listingReducer = createReducer(
       ...state,
       isLoading: false,
       isDetails: false,
+      listingDetailsResponse: null,
       listingsResponse: action.listingsResponse,
     })
   ),
@@ -44,6 +46,7 @@ const listingReducer = createReducer(
       ...state,
       isLoading: false,
       isDetails: false,
+      listingDetailsResponse: null,
     })
   ),
   on(
@@ -77,6 +80,7 @@ const listingReducer = createReducer(
       ...state,
       isLoading: true,
       isDetails: true,
+      listingsResponse: null,
     })
   ),
   on(
@@ -86,6 +90,7 @@ const listingReducer = createReducer(
       listingDetailsResponse: action.listingDetailsResponse,
       isLoading: false,
       isDetails: true,
+      listingsResponse: null,
     })
   ),
   on(
@@ -94,6 +99,7 @@ const listingReducer = createReducer(
       ...state,
       isLoading: false,
       isDetails: true,
+      listingsResponse: null,
     })
   ),
 );
