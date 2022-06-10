@@ -17,9 +17,14 @@ enum ActionTypes {
   IS_DETAILS_PAGE = '[Check] Is Details Page',
 }
 
+// export const displayListingsAction = createAction(
+//   ActionTypes.DISPLAY_LISTINGS,
+//   props<{sortBy: string}>()
+// );
+
 export const displayListingsAction = createAction(
   ActionTypes.DISPLAY_LISTINGS,
-  props<{sortBy: string}>()
+  props<{sortBy: string, after: string, before: string}>()
 );
 
 export const displayListingsSuccessAction = createAction(
@@ -44,20 +49,20 @@ export const displaySubInfoFailedAction = createAction(
   ActionTypes.DISPLAY_SUBINFO_FAILED,
 );
 
-// export const displayListingDetailsAction = createAction(
-//   ActionTypes.DISPLAY_LISTING_DETAILS,
-//   props<{propertyID: string}>()
-// );
-//
-// export const displayListingDetailsSuccessAction = createAction(
-//   ActionTypes.DISPLAY_LISTING_DETAILS_SUCCESS,
-//   props<{listingDetailsResponse: any}>()
-// );
-//
-// export const displayListingDetailsFailedAction = createAction(
-//   ActionTypes.DISPLAY_LISTING_DETAILS_FAILED,
-// );
-//
-// export const isDetailsPageAction = createAction(
-//   ActionTypes.IS_DETAILS_PAGE
-// );
+export const displayListingDetailsAction = createAction(
+  ActionTypes.DISPLAY_LISTING_DETAILS,
+  props<{listingID: string}>()
+);
+
+export const displayListingDetailsSuccessAction = createAction(
+  ActionTypes.DISPLAY_LISTING_DETAILS_SUCCESS,
+  props<{listingDetailsResponse: any}>()
+);
+
+export const displayListingDetailsFailedAction = createAction(
+  ActionTypes.DISPLAY_LISTING_DETAILS_FAILED,
+);
+
+export const isDetailsPageAction = createAction(
+  ActionTypes.IS_DETAILS_PAGE
+);

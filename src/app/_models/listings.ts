@@ -7,4 +7,5 @@ export interface Listings {
   score: number;
   created: number;
   author_fullname: string;
+  thumbnail: string;
 }

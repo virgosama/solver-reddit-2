@@ -1,1 +1,17 @@
-<p>details-page works!</p>
+<div class="listing-details">
+  <button mat-raised-button color="accent" (click)="onClickBack()">Back to List</button>
+  <div class="listing-details__main">
+    <mat-card>
+      <mat-card-title>{{listingSubject.title}}</mat-card-title>
+      <mat-card-subtitle>Posted by {{listingSubject.author}}</mat-card-subtitle>
+      <mat-card-subtitle>{{listingSubject.numComments}} comments | Score: {{listingSubject.score}}</mat-card-subtitle>
+      <mat-card-content>{{listingSubject.selfText}}</mat-card-content>
+    </mat-card>
+  </div>
+  <div class="listing-details__comments" *ngFor="let comment of listingComments">
+    <mat-card>
+      <mat-card-subtitle>Posted by {{comment.author}} | Score: {{comment.score}}</mat-card-subtitle>
+      <mat-card-content>{{comment.selfText}}</mat-card-content>
+    </mat-card>
+  </div>
+</div>

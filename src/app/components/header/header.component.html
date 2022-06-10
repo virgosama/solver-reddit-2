@@ -6,11 +6,13 @@
     <div class="header__icon">
       <img src="{{(subInfoResponse$ | async)?.community_icon}}" alt="icon">
     </div>
-    <h1 class="header__sub-title">
-      {{(subInfoResponse$ | async)?.title}}
-    </h1>
+    <div>
+      <h1 class="header__sub-title">
+        {{(subInfoResponse$ | async)?.title}}
+      </h1>
+      <p class="header__description">
+        {{(subInfoResponse$ | async)?.public_description}}
+      </p>
+    </div>
   </div>
-  <p class="header__description">
-   {{(subInfoResponse$ | async)?.public_description}}
-  </p>
 </div>

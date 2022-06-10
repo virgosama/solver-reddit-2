@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {SubInfo} from '../_models/subInfo';
+import {Listings} from '../_models/listings';
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +17,10 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  // best, hot, new, rising, top, sort, controversial
-
-  getListings(sortBy: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${sortBy}.json?limit=${this.limit}`)
-      .pipe(map((e: any) => e.data.children));
+  getListings(sortBy: string, after: string, before: string): Observable<Listings> {
+    return this.http.get<Listings>(`${this.apiUrl}/${sortBy}.json?limit=${this.limit}&before=${before}&after=${after}&count=${this.count}`)
+      .pipe(map((e: any) => e.data));
   }
-
-  // getSubInfo(): Observable<SubInfo> {
-  //   return this.http.get<SubInfo>(`${this.apiUrl}/about.json`)
-  //     .pipe(map((e: any) => e.data));
-  // }
 
   getSubInfo(): Observable<SubInfo> {
     return this.http.get<SubInfo>(`${this.apiUrl}/about.json`)
@@ -50,16 +44,8 @@ export class ApiService {
     return parsedUrl[0] + '.png';
   }
 
-  // getComments(id: string): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/comments/${id}.json`);
-  // }
-  //
-  // getNextPage(sortBy: string, after: string): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/${sortBy}.json?count=${this.count}?after=${after}?limit=${this.limit}`);
-  // }
-  //
-  // getPreviousPage(sortBy: string, before: string): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/${sortBy}.json?count=${this.count}?before=${before}?limit=${this.limit}`);
-  //
-  // }
+  getListingDetails(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/comments/${id}.json`);
+  }
+
 }

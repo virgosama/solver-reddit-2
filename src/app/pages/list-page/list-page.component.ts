@@ -1,50 +1,65 @@
-import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
-import {displayListingsAction} from '../../_stores/actions';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {displayListingDetailsAction, displayListingsAction} from '../../_stores/actions';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../_models/app-state';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {displayListingsSelector} from '../../_stores/selectors';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list-page',
   templateUrl: './list-page.component.html',
   styleUrls: ['./list-page.component.scss']
 })
-export class ListPageComponent implements OnInit {
+export class ListPageComponent implements OnInit, OnDestroy {
 
   sortBy = 'new';
+  pageLength = 11;
+  nextPageListings = '';
+  prevPageListings = '';
+  listingResponseSubscription: Subscription;
   listingsResponse$ = null as Observable<any> | null;
-  topicList = [] as any;
 
-  constructor(private apiService: ApiService,
-              private store: Store<AppState>) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(displayListingsAction({sortBy: this.sortBy}));
     this.loadListings();
   }
 
   loadListings(): void {
+    this.store.dispatch(displayListingsAction({sortBy: this.sortBy, after: this.nextPageListings, before: this.prevPageListings}));
     this.listingsResponse$ = this.store.pipe(select(displayListingsSelector));
-    // this.listingsResponse$.subscribe(response => {
-    //   if (response) {
-    //     this.topicList = response.map((e: any) => e.data);
-    //   }
-    // });
-    // this.apiService.getListings2('new').subscribe(e => {
-    //   console.log(e);
-    // });
-    // this.apiService.getListings('new').subscribe(response => {
-    //   console.log(response);
-    // });
-    // this.apiService.getNextPage('new').subscribe(response => {
-    //   console.log(response);
-    // });
-    // this.apiService.getPreviousPage('new').subscribe(response => {
-    //   console.log(response);
-    // });
+    this.listingResponseSubscription = this.store.pipe(select(displayListingsSelector)).subscribe(response => {
+      if (response) {
+        console.log(response);
+        this.nextPageListings = response.after || '';
+        this.prevPageListings = response.before || '';
+      }
+    });
+
+  }
+
+  onPageChange(pageEvent: PageEvent): void {
+    window.scrollTo(0, 0);
+    const {pageIndex, previousPageIndex} = pageEvent;
+    if (pageIndex > previousPageIndex) {
+      this.prevPageListings = '';
+      this.pageLength += 10;
+    } else {
+      this.pageLength -= 10;
+      this.nextPageListings = '';
+    }
+    this.loadListings();
+  }
+
+  onClickReadMore(listingID: string): void {
+    this.store.dispatch(displayListingDetailsAction({listingID}));
+
+  }
+
+  ngOnDestroy(): void {
+    this.listingResponseSubscription.unsubscribe();
   }
 
 }

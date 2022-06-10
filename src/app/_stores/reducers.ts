@@ -1,10 +1,9 @@
 import {createReducer, on, Action} from '@ngrx/store';
-// import {
-//   displayListingDetailsAction, displayListingDetailsFailedAction, displayListingDetailsSuccessAction,
-//   displayListingsAction, displayListingsFailedAction, displayListingsSuccessAction
-// } from './actions';
 import {ListingsState} from '../_models/listings-state';
 import {
+  displayListingDetailsAction,
+  displayListingDetailsFailedAction,
+  displayListingDetailsSuccessAction,
   displayListingsAction,
   displayListingsFailedAction,
   displayListingsSuccessAction,
@@ -26,7 +25,8 @@ const listingReducer = createReducer(
     displayListingsAction,
     (state): ListingsState => ({
       ...state,
-      isLoading: true
+      isLoading: true,
+      isDetails: false,
     })
   ),
   on(
@@ -34,6 +34,7 @@ const listingReducer = createReducer(
     (state, action): ListingsState => ({
       ...state,
       isLoading: false,
+      isDetails: false,
       listingsResponse: action.listingsResponse,
     })
   ),
@@ -42,13 +43,15 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: false,
+      isDetails: false,
     })
   ),
   on(
     displaySubInfoAction,
     (state): ListingsState => ({
       ...state,
-      isLoading: true
+      isLoading: true,
+      isDetails: false,
     })
   ),
   on(
@@ -56,6 +59,7 @@ const listingReducer = createReducer(
     (state, action): ListingsState => ({
       ...state,
       isLoading: false,
+      isDetails: false,
       subInfoResponse: action.subInfoResponse,
     })
   ),
@@ -64,32 +68,34 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: false,
+      isDetails: false,
     })
   ),
-  // on(
-  //   displayListingDetailsAction,
-  //   (state): ListingsState => ({
-  //     ...state,
-  //     isLoading: true
-  //   })
-  // ),
-  // on(
-  //   displayListingDetailsSuccessAction,
-  //   (state, action): ListingsState => ({
-  //     ...state,
-  //     apartmentDetailsResponse: action.apartmentDetails,
-  //     isLoading: false,
-  //     isList: false
-  //   })
-  // ),
-  // on(
-  //   displayListingDetailsFailedAction,
-  //   (state): ListingsState => ({
-  //     ...state,
-  //     isLoading: false,
-  //     isList: true
-  //   })
-  // ),
+  on(
+    displayListingDetailsAction,
+    (state): ListingsState => ({
+      ...state,
+      isLoading: true,
+      isDetails: true,
+    })
+  ),
+  on(
+    displayListingDetailsSuccessAction,
+    (state, action): ListingsState => ({
+      ...state,
+      listingDetailsResponse: action.listingDetailsResponse,
+      isLoading: false,
+      isDetails: true,
+    })
+  ),
+  on(
+    displayListingDetailsFailedAction,
+    (state): ListingsState => ({
+      ...state,
+      isLoading: false,
+      isDetails: true,
+    })
+  ),
 );
 
 export function reducers(state: ListingsState, action: Action): {} {

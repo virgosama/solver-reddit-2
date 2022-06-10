@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {
+  displayListingDetailsAction, displayListingDetailsFailedAction,
+  displayListingDetailsSuccessAction,
   displayListingsAction,
   displayListingsFailedAction,
   displayListingsSuccessAction,
@@ -18,7 +20,7 @@ export class MapEffect {
     this.actions$.pipe(
       ofType(displayListingsAction),
       switchMap(response => {
-        return this.apiService.getListings(response.sortBy).pipe(
+        return this.apiService.getListings(response.sortBy, response.after, response.before).pipe(
           map((listingsResponse: any) => {
             return displayListingsSuccessAction({listingsResponse});
           }),
@@ -48,21 +50,21 @@ export class MapEffect {
     )
   );
 
-  // displayApartmentDetails$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(displayApartmentDetailsAction),
-  //     switchMap(response => {
-  //       return this.apiService.getApartmentDetails(response.propertyID).pipe(
-  //         map((apartmentDetails: ApartmentDataDetails) => {
-  //           return displayApartmentDetailsSuccessAction({apartmentDetails});
-  //         }),
-  //         catchError(() => {
-  //           return of(displayApartmentDetailsFailedAction());
-  //         })
-  //       );
-  //     })
-  //   )
-  // );
+  displayListingDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(displayListingDetailsAction),
+      switchMap(response => {
+        return this.apiService.getListingDetails(response.listingID).pipe(
+          map((listingDetailsResponse: any) => {
+            return displayListingDetailsSuccessAction({listingDetailsResponse});
+          }),
+          catchError(() => {
+            return of(displayListingDetailsFailedAction());
+          })
+        );
+      })
+    )
+  );
 
 
   constructor(

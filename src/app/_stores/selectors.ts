@@ -22,12 +22,12 @@ export const displaySubInfoSelector = createSelector(
 //   (mapState: ListingsState) => mapState.isLoading
 // );
 //
-// export const displayListingDetailsSelector = createSelector(
-//   mapFeatureSelector,
-//   (mapState: ListingsState) => mapState.listingDetailsResponse
-// );
-//
-// export const isDetailsSelector = createSelector(
-//   mapFeatureSelector,
-//   (mapState: ListingsState) => mapState.isDetails
-// );
+export const displayListingDetailsSelector = createSelector(
+  listingsFeatureSelector,
+  (listingsState: ListingsState) => listingsState.listingDetailsResponse
+);
+
+export const isDetailsSelector = createSelector(
+  listingsFeatureSelector,
+  (listingsState: ListingsState) => listingsState.isDetails
+);

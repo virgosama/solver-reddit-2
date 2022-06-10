@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {displaySubInfoAction} from '../../_stores/actions';
+import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../_models/app-state';
-import {displaySubInfoSelector} from '../../_stores/selectors';
-import {Observable} from 'rxjs';
-import {SubInfo} from '../../_models/subInfo';
+import {isDetailsSelector} from '../../_stores/selectors';
 
 @Component({
   selector: 'app-main-page',
@@ -13,18 +11,13 @@ import {SubInfo} from '../../_models/subInfo';
 })
 export class MainPageComponent implements OnInit {
 
-  // subInfoResponse$ = {} as Observable<SubInfo> | {};
+  isDetailsPage$ = null as Observable<any> | null;
 
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    // this.store.dispatch(displaySubInfoAction());
-    // this.loadSubInfo();
-  }
-
-  loadSubInfo(): void {
-    // this.subInfoResponse$ = this.store.pipe(select(displaySubInfoSelector));
+    this.isDetailsPage$ = this.store.pipe(select(isDetailsSelector));
   }
 
 }
