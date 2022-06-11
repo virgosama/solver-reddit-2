@@ -4,18 +4,18 @@
   ></app-error-handler>
   <ng-container *ngIf="!(isHeaderError$ | async)">
     <div class="header__banner">
-      <img src="{{(subInfoResponse$ | async)?.banner_background_image}}" alt="banner">
+      <img src="{{(subInfoResponse$ | async)?.bannerBackgroundImage}}" alt="banner">
     </div>
     <div class="header__title">
       <div class="header__icon">
-        <img src="{{(subInfoResponse$ | async)?.community_icon}}" alt="icon">
+        <img src="{{(subInfoResponse$ | async)?.communityIcon}}" alt="icon">
       </div>
       <div>
         <h1 class="header__sub-title">
           {{(subInfoResponse$ | async)?.title}}
         </h1>
         <p class="header__description">
-          {{(subInfoResponse$ | async)?.public_description}}
+          {{(subInfoResponse$ | async)?.publicDescription}}
         </p>
       </div>
     </div>

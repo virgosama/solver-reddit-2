@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {AppState} from '../../_models/app-state';
 import {select, Store} from '@ngrx/store';
-import {displayListingDetailsSelector, isDetailsErrorSelector, isLoadingSelector} from '../../_stores/selectors';
+import {displayListingDetailsSelector, isDetailsErrorSelector} from '../../_stores/selectors';
 import {displayListingsAction} from '../../_stores/actions';
 
 @Component({
@@ -41,6 +41,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
           numComments: listingSubjectTemp.num_comments,
           score: listingSubjectTemp.score,
           selfText: listingSubjectTemp.selftext,
+          thumbnail: listingSubjectTemp.thumbnail,
           title: listingSubjectTemp.title
         };
 

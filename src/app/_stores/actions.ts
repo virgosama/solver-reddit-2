@@ -13,14 +13,7 @@ enum ActionTypes {
   DISPLAY_SUBINFO = '[Load] Subreddit Info',
   DISPLAY_SUBINFO_SUCCESS = '[Load] Subreddit Info Success',
   DISPLAY_SUBINFO_FAILED = '[Load] Subreddit Info Failed',
-
-  IS_DETAILS_PAGE = '[Check] Is Details Page',
 }
-
-// export const displayListingsAction = createAction(
-//   ActionTypes.DISPLAY_LISTINGS,
-//   props<{sortBy: string}>()
-// );
 
 export const displayListingsAction = createAction(
   ActionTypes.DISPLAY_LISTINGS,
@@ -61,8 +54,4 @@ export const displayListingDetailsSuccessAction = createAction(
 
 export const displayListingDetailsFailedAction = createAction(
   ActionTypes.DISPLAY_LISTING_DETAILS_FAILED,
-);
-
-export const isDetailsPageAction = createAction(
-  ActionTypes.IS_DETAILS_PAGE
 );

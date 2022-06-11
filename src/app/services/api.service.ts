@@ -27,9 +27,9 @@ export class ApiService {
       .pipe(map((e: any) => (
           {
             title: e.data.title,
-            public_description: e.data.public_description,
-            community_icon: this.parseImg(e.data.community_icon),
-            banner_background_image: this.parseImg(e.data.banner_background_image)
+            publicDescription: e.data.public_description,
+            communityIcon: this.parseImg(e.data.community_icon),
+            bannerBackgroundImage: this.parseImg(e.data.banner_background_image)
           }
         )
       ));
