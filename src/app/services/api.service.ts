@@ -10,7 +10,7 @@ import {Listings} from '../_models/listings';
 })
 export class ApiService {
 
-  apiUrl = 'http://www.reddit.com/r/cookingforbeginners';
+  apiUrl = 'https://www.reddit.com/r/cookingforbeginners';
   count = 10;
   limit = 10;
 
