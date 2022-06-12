@@ -3,4 +3,6 @@ export interface SubInfo {
   publicDescription: string;
   communityIcon: string;
   bannerBackgroundImage: string;
+  activeUserCount: number;
+  subscribers: number
 }

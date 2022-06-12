@@ -10,7 +10,7 @@ import {Listings} from '../_models/listings';
 })
 export class ApiService {
 
-  apiUrl = 'https://www.reddit.com/r/cookingforbeginners';
+  apiUrl = 'https://www.reddit.com/r/orangecounty';
   count = 10;
   limit = 10;
 
@@ -29,7 +29,9 @@ export class ApiService {
             title: e.data.title,
             publicDescription: e.data.public_description,
             communityIcon: this.parseImg(e.data.community_icon),
-            bannerBackgroundImage: this.parseImg(e.data.banner_background_image)
+            bannerBackgroundImage: this.parseImg(e.data.banner_background_image),
+            activeUserCount: e.data.active_user_count,
+            subscribers: e.data.subscribers
           }
         )
       ));

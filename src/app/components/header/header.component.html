@@ -17,6 +17,8 @@
         <p class="header__description">
           {{(subInfoResponse$ | async)?.publicDescription}}
         </p>
+        <span>Subscribers: {{(subInfoResponse$ | async)?.subscribers | number: '1.0-3' : 'en-US'}} | </span>
+        <span>Active users: {{(subInfoResponse$ | async)?.activeUserCount | number: '1.0-3' : 'en-US'}}</span>
       </div>
     </div>
   </ng-container>
