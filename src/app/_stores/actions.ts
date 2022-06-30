@@ -17,7 +17,7 @@ enum ActionTypes {
 
 export const displayListingsAction = createAction(
   ActionTypes.DISPLAY_LISTINGS,
-  props<{sortBy: string, after: string, before: string}>()
+  props<{after: string, before: string}>()
 );
 
 export const displayListingsSuccessAction = createAction(

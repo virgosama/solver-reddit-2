@@ -1,0 +1,7 @@
+<mat-chip-list>
+  <mat-chip *ngFor="let option of sortOptions"
+            [selected]="option === selectedOption"
+            (click)="onClickSort(option)">
+    {{option}}
+  </mat-chip>
+</mat-chip-list>

@@ -20,7 +20,7 @@ export class MapEffect {
     this.actions$.pipe(
       ofType(displayListingsAction),
       switchMap(response => {
-        return this.apiService.getListings(response.sortBy, response.after, response.before).pipe(
+        return this.apiService.getListings(response.after, response.before).pipe(
           map((listingsResponse: any) => {
             return displayListingsSuccessAction({listingsResponse});
           }),
