@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {SubInfo} from '../_models/subInfo';
 import {Listings} from '../_models/listings';
@@ -10,15 +10,30 @@ import {Listings} from '../_models/listings';
 })
 export class ApiService {
 
-  apiUrl = 'https://www.reddit.com/r/orangecounty';
+  apiUrl = 'https://www.reddit.com/r/';
   count = 10;
   limit = 10;
+
+  private sort = new BehaviorSubject('new');
+  currentSort = this.sort.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
-  getListings(sortBy: string, after: string, before: string): Observable<Listings> {
-    return this.http.get<Listings>(`${this.apiUrl}/${sortBy}.json?limit=${this.limit}&before=${before}&after=${after}&count=${this.count}`)
+  setApiUrl(value: string): void {
+    this.apiUrl += value;
+  }
+
+  getApiUrl(): string {
+    return this.apiUrl;
+  }
+
+  changeSort(selectedSort: string): void {
+    this.sort.next(selectedSort);
+  }
+
+  getListings(after: string, before: string): Observable<Listings> {
+    return this.http.get<Listings>(`${this.apiUrl}/${this.sort.getValue()}.json?limit=${this.limit}&before=${before}&after=${after}&count=${this.count}`)
       .pipe(map((e: any) => e.data));
   }
 
