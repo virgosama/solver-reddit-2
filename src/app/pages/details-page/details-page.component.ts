@@ -3,7 +3,8 @@ import {Observable, Subscription} from 'rxjs';
 import {AppState} from '../../_models/app-state';
 import {select, Store} from '@ngrx/store';
 import {displayListingDetailsSelector, isDetailsErrorSelector} from '../../_stores/selectors';
-import {displayListingsAction} from '../../_stores/actions';
+import {displayListingDetailsAction, displayListingsAction} from '../../_stores/actions';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-details-page',
@@ -12,7 +13,6 @@ import {displayListingsAction} from '../../_stores/actions';
 })
 export class DetailsPageComponent implements OnInit, OnDestroy {
 
-  sortBy = 'new';
   nextPageListings = '';
   prevPageListings = '';
 
@@ -21,7 +21,8 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
   listingSubject = {} as any;
   listingComments = [] as any[];
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
           media: listingSubjectTemp.media,
           numComments: listingSubjectTemp.num_comments,
           score: listingSubjectTemp.score,
-          selfText: listingSubjectTemp.selftext,
+          selftext: listingSubjectTemp.selftext,
           thumbnail: listingSubjectTemp.thumbnail,
           title: listingSubjectTemp.title
         };
@@ -60,7 +61,8 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
   }
 
   onClickBack(): void {
-    this.store.dispatch(displayListingsAction({sortBy: this.sortBy, after: this.nextPageListings, before: this.prevPageListings}));
+    this.router.navigate(['../']);
+    this.store.dispatch(displayListingsAction({after: this.nextPageListings, before: this.prevPageListings}));
   }
 
   ngOnDestroy(): void {

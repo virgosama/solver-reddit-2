@@ -16,6 +16,10 @@ import { HeaderComponent } from './components/header/header.component';
 import {MaterialModule} from './material.module';
 import {LoadingComponent} from './components/loading/loading.component';
 import {ErrorHandlerComponent} from './components/error-handler/error-handler.component';
+import {RepliesComponent} from "./components/replies/replies.component";
+import {CustomDateTimePipe} from "./helpers/custom-date-time.pipe";
+import {AppRoutingModule} from "./app-routing.module";
+import {SortOptionsComponent} from "./components/sort-options/sort-options.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import {ErrorHandlerComponent} from './components/error-handler/error-handler.co
     DetailsPageComponent,
     HeaderComponent,
     LoadingComponent,
-    ErrorHandlerComponent
+    ErrorHandlerComponent,
+    RepliesComponent,
+    CustomDateTimePipe,
+    SortOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +49,7 @@ import {ErrorHandlerComponent} from './components/error-handler/error-handler.co
       MapEffect
     ]),
     BrowserAnimationsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
