@@ -5,6 +5,7 @@ import {AppState} from '../../_models/app-state';
 import {Observable, Subscription} from 'rxjs';
 import {displayListingsSelector, isListErrorSelector, isLoadingSelector} from '../../_stores/selectors';
 import {PageEvent} from '@angular/material/paginator';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-page',
@@ -13,7 +14,6 @@ import {PageEvent} from '@angular/material/paginator';
 })
 export class ListPageComponent implements OnInit, OnDestroy {
 
-  sortBy = 'new';
   pageLength = 11;
   nextPageListings = '';
   prevPageListings = '';
@@ -22,7 +22,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
   listingResponseSubscription: Subscription;
   listingsResponse$ = null as Observable<any> | null;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -30,7 +32,10 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   loadListings(): void {
-    this.store.dispatch(displayListingsAction({sortBy: this.sortBy, after: this.nextPageListings, before: this.prevPageListings}));
+    this.store.dispatch(displayListingsAction({
+      after: this.nextPageListings,
+      before: this.prevPageListings
+    }));
     this.listingsResponse$ = this.store.pipe(select(displayListingsSelector));
     this.isListError$ = this.store.pipe(select(isListErrorSelector));
     this.listingResponseSubscription = this.store.pipe(select(displayListingsSelector)).subscribe(response => {
@@ -55,8 +60,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   onClickReadMore(listingID: string): void {
+    const url = this.route.snapshot.paramMap.get('subId');
+    this.router.navigateByUrl(`${url}/${listingID}`);
     this.store.dispatch(displayListingDetailsAction({listingID}));
-
   }
 
   ngOnDestroy(): void {

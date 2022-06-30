@@ -63,7 +63,6 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: true,
-      isOnDetailsPage: false,
       isListError: false,
       isHeaderError: false,
       isDetailsError: false,
@@ -74,7 +73,6 @@ const listingReducer = createReducer(
     (state, action): ListingsState => ({
       ...state,
       isLoading: false,
-      isOnDetailsPage: false,
       isHeaderError: false,
       isListError: false,
       isDetailsError: false,
@@ -86,7 +84,6 @@ const listingReducer = createReducer(
     (state): ListingsState => ({
       ...state,
       isLoading: false,
-      isOnDetailsPage: false,
       isHeaderError: true,
       isListError: false,
       isDetailsError: false,
