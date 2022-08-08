@@ -1,7 +1,7 @@
 <ng-container *ngFor="let reply of replies.data.children">
 
   <mat-card style="margin-bottom: 1rem;">
-    <mat-card-subtitle>Replied by {{reply.data.author}} {{reply.data.created | customDateTime}} | Score: {{reply.data.score}}</mat-card-subtitle>
+    <mat-card-subtitle>Replied by {{reply.data.author}} on {{reply.data.created | customDateTime}} | Score: {{reply.data.score}}</mat-card-subtitle>
     <mat-card-content>{{reply.data.body}}</mat-card-content>
     <app-replies [replies]="reply.data.replies" *ngIf="reply.data.replies"></app-replies>
   </mat-card>
